@@ -4,6 +4,7 @@
 
     @available(macOS 11.0, *)
     struct TextViewWrapper: NSViewRepresentable {
+        var isSelectable: Bool
         final class View: NSTextView {
             var maxLayoutWidth: CGFloat {
                 get { textContainer?.containerSize.width ?? 0 }
@@ -48,6 +49,7 @@
             let nsView = View(frame: .zero)
 
             nsView.drawsBackground = false
+            nsView.isSelectable = isSelectable
             nsView.textContainerInset = .zero
             nsView.isEditable = false
             nsView.isRichText = false

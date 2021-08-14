@@ -4,6 +4,8 @@
 
     @available(iOS 14.0, tvOS 14.0, macCatalyst 14.0, *)
     struct TextViewWrapper: UIViewRepresentable {
+        var isSelectable: Bool
+        
         final class View: UITextView {
             var maxLayoutWidth: CGFloat = 0 {
                 didSet {
@@ -54,6 +56,7 @@
         func updateUIView(_ uiView: View, context: Context) {
             uiView.attributedText = attributedText
             uiView.maxLayoutWidth = maxLayoutWidth
+            uiView.isSelectable = isSelectable
 
             uiView.textContainer.maximumNumberOfLines = context.environment.lineLimit ?? 0
             uiView.textContainer.lineBreakMode = NSLineBreakMode(truncationMode: context.environment.truncationMode)

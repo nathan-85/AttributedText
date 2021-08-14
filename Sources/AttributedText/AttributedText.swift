@@ -7,14 +7,17 @@
         @StateObject private var textViewStore = TextViewStore()
 
         private let attributedText: NSAttributedString
+        private var isSelectable: Bool
 
-        public init(_ attributedText: NSAttributedString) {
+        public init(_ attributedText: NSAttributedString, isSelectable: Bool = false) {
             self.attributedText = attributedText
+            self.isSelectable = isSelectable
         }
 
         public var body: some View {
             GeometryReader { geometry in
                 TextViewWrapper(
+                    isSelectable: isSelectable,
                     attributedText: attributedText,
                     maxLayoutWidth: geometry.maxWidth,
                     textViewStore: textViewStore
