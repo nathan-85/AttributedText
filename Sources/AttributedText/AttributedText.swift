@@ -7,11 +7,13 @@
         @StateObject private var textViewStore = TextViewStore()
 
         private let attributedText: NSAttributedString
-        private var isSelectable: Bool
+        private let isSelectable: Bool
+        private let fillParentView: Bool
 
-        public init(_ attributedText: NSAttributedString, isSelectable: Bool = false) {
+        public init(_ attributedText: NSAttributedString, isSelectable: Bool = false, fillParentView: Bool = true) {
             self.attributedText = attributedText
             self.isSelectable = isSelectable
+            self.fillParentView = fillParentView
         }
 
         public var body: some View {
@@ -25,6 +27,7 @@
             }
             .frame(
                 idealWidth: textViewStore.intrinsicContentSize?.width,
+                maxWidth: fillParentView ? .infinity : textViewStore.intrinsicContentSize?.width,
                 idealHeight: textViewStore.intrinsicContentSize?.height
             )
             .fixedSize(horizontal: false, vertical: true)
